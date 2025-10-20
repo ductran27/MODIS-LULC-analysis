@@ -45,50 +45,72 @@ class LULCVisualizer:
         plt.style.use('seaborn-v0_8-whitegrid')
     
     def create_global_map(self, df, area_results, year):
-        """Create global land cover map showing spatial distribution"""
-        fig = plt.figure(figsize=(20, 10))
-        ax = fig.add_subplot(111, projection=ccrs.Robinson())
+        """Create land cover statistics visualization (not attempting full raster)"""
+        # Note: True MODIS global maps require processing actual raster data (millions of pixels)
+        # For this demonstration, we focus on statistical visualization
         
-        ax.set_global()
+        fig = plt.figure(figsize=(20, 11))
         
-        # Add geographic features
-        ax.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor='#333333')
-        ax.add_feature(cfeature.BORDERS, linewidth=0.3, edgecolor='#666666', alpha=0.5)
-        ax.add_feature(cfeature.OCEAN, facecolor='#E0F3F8')
+        # Main area statistics visualization
+        gs = fig.add_gridspec(2, 2, height_ratios=[2, 1], width_ratios=[3, 2])
         
-        # Plot land cover pixels with very small markers for continuous appearance
-        for lc_class in sorted(df['land_cover_class'].unique()):
-            class_data = df[df['land_cover_class'] == lc_class]
-            lc_name = class_data['land_cover_name'].iloc[0]
-            color = self.LC_COLORS.get(lc_name, '#808080')
-            
-            ax.scatter(class_data['longitude'], class_data['latitude'],
-                      c=color, s=1, alpha=0.9, edgecolors='none',
-                      transform=ccrs.PlateCarree(), rasterized=True)
+        # Large bar chart of all classes
+        ax1 = fig.add_subplot(gs[0, :])
+        class_stats = area_results['class_statistics']
+        sorted_classes = sorted(class_stats.items(), 
+                               key=lambda x: x[1]['area_km2'], reverse=True)
         
-        # Title
-        ax.set_title(f'MODIS Global Land Cover Classification - {year}', 
-                    fontsize=18, fontweight='bold', pad=20)
+        classes = [c[0][:30] for c in sorted_classes]
+        areas = [c[1]['area_km2'] for c in sorted_classes]
+        colors = [self.LC_COLORS.get(c[0], '#808080') for c in sorted_classes]
         
-        # Create custom legend with all classes
-        legend_elements = []
-        for lc_name, color in self.LC_COLORS.items():
-            if lc_name in df['land_cover_name'].values:
-                legend_elements.append(mpatches.Patch(color=color, label=lc_name))
+        bars = ax1.barh(classes, areas, color=colors, alpha=0.85, edgecolor='black', linewidth=0.8)
+        ax1.set_xlabel('Area (km²)', fontsize=13, fontweight='bold')
+        ax1.set_title(f'MODIS Land Cover Area Distribution - {year}', 
+                     fontsize=18, fontweight='bold', pad=15)
+        ax1.grid(True, alpha=0.3, axis='x')
+        ax1.tick_params(labelsize=10)
         
-        # Place legend outside plot
-        ax.legend(handles=legend_elements[:12], loc='lower left', 
-                 fontsize=8, ncol=2, frameon=True, framealpha=0.95,
-                 title='Land Cover Classes', title_fontsize=9)
+        # Add percentage labels
+        for i, (bar, (class_name, stats)) in enumerate(zip(bars, sorted_classes)):
+            width = bar.get_width()
+            ax1.text(width * 1.01, bar.get_y() + bar.get_height()/2,
+                    f"{stats['percentage']:.1f}%", 
+                    va='center', fontsize=9, fontweight='bold')
+        
+        # Pie chart
+        ax2 = fig.add_subplot(gs[1, 0])
+        top_5 = sorted_classes[:8]
+        labels = [c[0][:20] for c in top_5]
+        sizes = [c[1]['percentage'] for c in top_5]
+        colors_pie = [self.LC_COLORS.get(c[0], '#808080') for c in top_5]
+        
+        ax2.pie(sizes, labels=labels, colors=colors_pie, autopct='%1.1f%%',
+               startangle=90, textprops={'fontsize': 8})
+        ax2.set_title('Top Land Cover Types', fontsize=12, fontweight='bold')
+        
+        # Summary text
+        ax3 = fig.add_subplot(gs[1, 1])
+        ax3.axis('off')
+        
+        summary_text = f"MODIS Land Cover Summary - {year}\n\n"
+        summary_text += f"Total Area Sampled: {area_results['total_area_km2']:.0f} km²\n"
+        summary_text += f"Total Pixels: {area_results['total_pixels']:,}\n"
+        summary_text += f"Land Cover Classes: {area_results['total_classes']}\n\n"
+        summary_text += "Top 3 Classes:\n"
+        for i, (class_name, stats) in enumerate(sorted_classes[:3], 1):
+            summary_text += f"{i}. {class_name[:25]}\n"
+            summary_text += f"   {stats['percentage']:.1f}% ({stats['area_km2']:.0f} km²)\n"
+        
+        ax3.text(0.1, 0.9, summary_text, transform=ax3.transAxes,
+                fontsize=11, verticalalignment='top', family='monospace',
+                bbox=dict(boxstyle='round,pad=1', facecolor='wheat', alpha=0.3))
         
         plt.tight_layout()
         
-        filepath = self.plots_dir / f'global_lc_map_{year}.png'
+        filepath = self.plots_dir / f'lc_statistics_{year}.png'
         plt.savefig(filepath, dpi=150, bbox_inches='tight', facecolor='white')
         plt.close()
-        
-        # Also create area statistics chart
-        self._create_area_chart(area_results, year)
         
         return filepath
     
