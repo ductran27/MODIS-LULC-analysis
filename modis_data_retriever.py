@@ -66,8 +66,8 @@ class MODISRetriever:
         """
         np.random.seed(year)  # Different pattern each year
         
-        # Sample ~5000 pixels globally
-        n_pixels = 5000
+        # Sample many more pixels for better coverage
+        n_pixels = 50000  # Increased for better spatial coverage
         
         # Generate global coordinates
         lons = np.random.uniform(-180, 180, n_pixels)

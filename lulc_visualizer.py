@@ -56,16 +56,15 @@ class LULCVisualizer:
         ax.add_feature(cfeature.BORDERS, linewidth=0.3, edgecolor='#666666', alpha=0.5)
         ax.add_feature(cfeature.OCEAN, facecolor='#E0F3F8')
         
-        # Plot land cover pixels with proper colors
+        # Plot land cover pixels with very small markers for continuous appearance
         for lc_class in sorted(df['land_cover_class'].unique()):
             class_data = df[df['land_cover_class'] == lc_class]
             lc_name = class_data['land_cover_name'].iloc[0]
             color = self.LC_COLORS.get(lc_name, '#808080')
             
             ax.scatter(class_data['longitude'], class_data['latitude'],
-                      c=color, s=8, alpha=0.8, edgecolors='none',
-                      transform=ccrs.PlateCarree(), rasterized=True,
-                      label=lc_name if len(class_data) > 100 else None)
+                      c=color, s=1, alpha=0.9, edgecolors='none',
+                      transform=ccrs.PlateCarree(), rasterized=True)
         
         # Title
         ax.set_title(f'MODIS Global Land Cover Classification - {year}', 
