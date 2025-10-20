@@ -45,38 +45,38 @@ class LULCVisualizer:
         plt.style.use('seaborn-v0_8-whitegrid')
     
     def create_global_map(self, df, area_results, year):
-        """Create global land cover map for a specific year"""
-        fig = plt.figure(figsize=(20, 10))
-        ax = fig.add_subplot(111, projection=ccrs.PlateCarree())
+        """Create global land cover map as pie chart showing area distribution"""
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 8))
         
-        ax.set_global()
+        # Pie chart showing area distribution
+        class_stats = area_results['class_statistics']
+        classes = list(class_stats.keys())
+        percentages = [class_stats[c]['percentage'] for c in classes]
+        colors = [self.LC_COLORS.get(c, '#808080') for c in classes]
         
-        # Add basic features
-        ax.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor='black', alpha=0.3)
-        ax.add_feature(cfeature.BORDERS, linewidth=0.3, edgecolor='gray', alpha=0.2)
-        ax.stock_img()
+        # Only show classes with >2% coverage
+        significant = [(c, p, col) for c, p, col in zip(classes, percentages, colors) if p > 2]
+        if significant:
+            labels, values, colors_sig = zip(*significant)
+        else:
+            labels, values, colors_sig = classes[:10], percentages[:10], colors[:10]
         
-        # Plot pixels by land cover class
-        for lc_class in df['land_cover_name'].unique():
-            class_data = df[df['land_cover_name'] == lc_class]
-            color = self.LC_COLORS.get(lc_class, '#808080')
-            ax.scatter(class_data['longitude'], class_data['latitude'],
-                      c=color, s=2, alpha=0.6, transform=ccrs.PlateCarree(),
-                      label=lc_class if len(class_data) > 50 else None)
+        wedges, texts, autotexts = ax1.pie(values, labels=labels, colors=colors_sig,
+                                            autopct='%1.1f%%', startangle=90,
+                                            textprops={'fontsize': 9})
+        ax1.set_title(f'Land Cover Distribution - {year}', fontsize=14, fontweight='bold')
         
-        # Add gridlines
-        gl = ax.gridlines(draw_labels=True, linewidth=0.3, color='gray', alpha=0.3)
-        gl.top_labels = False
-        gl.right_labels = False
+        # Bar chart of top 10 classes
+        top_classes = area_results['top_5_classes'][:10]
+        class_names = [c['name'][:25] for c in top_classes]  # Truncate names
+        class_pcts = [c['percentage'] for c in top_classes]
+        bar_colors = [self.LC_COLORS.get(top_classes[i]['name'], '#808080') 
+                     for i in range(len(top_classes))]
         
-        ax.set_title(f'MODIS Global Land Cover - {year}', 
-                    fontsize=18, fontweight='bold', pad=20)
-        
-        # Add legend for top classes only
-        handles, labels = ax.get_legend_handles_labels()
-        if handles:
-            ax.legend(handles[:8], labels[:8], loc='lower left', 
-                     fontsize=8, ncol=2, framealpha=0.9)
+        ax2.barh(class_names, class_pcts, color=bar_colors, alpha=0.8, edgecolor='black')
+        ax2.set_xlabel('Coverage (%)', fontsize=11)
+        ax2.set_title('Top Land Cover Classes', fontsize=14, fontweight='bold')
+        ax2.grid(True, alpha=0.3, axis='x')
         
         plt.tight_layout()
         
@@ -136,39 +136,46 @@ class LULCVisualizer:
         return filepath
     
     def create_change_map(self, all_year_data, change_results, year_start, year_end):
-        """Create change detection map showing transitions"""
-        fig = plt.figure(figsize=(20, 10))
-        ax = fig.add_subplot(111, projection=ccrs.PlateCarree())
+        """Create change comparison chart showing land cover transitions"""
+        fig, ax = plt.subplots(figsize=(16, 10))
         
-        ax.set_global()
-        ax.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor='black', alpha=0.3)
-        ax.add_feature(cfeature.BORDERS, linewidth=0.3, edgecolor='gray', alpha=0.2)
+        # Get major changes
+        changes = change_results['area_changes'][:12]  # Top 12 changes
         
-        # Highlight areas of change
-        # For demonstration, show forest loss and urban gain
-        df_start = all_year_data[year_start]
-        df_end = all_year_data[year_end]
+        class_names = [c['class_name'][:30] for c in changes]
+        pixels_start = [c['pixels_start'] for c in changes]
+        pixels_end = [c['pixels_end'] for c in changes]
         
-        # Simulated change pixels
-        forest_classes = [1, 2, 3, 4, 5]
-        forest_to_other = df_start[df_start['land_cover_class'].isin(forest_classes)].sample(n=min(200, len(df_start)//20))
-        urban_gain = df_end[df_end['land_cover_class'] == 13].sample(n=min(150, len(df_end[df_end['land_cover_class'] == 13])//10))
+        x = np.arange(len(class_names))
+        width = 0.35
         
-        # Plot change areas
-        ax.scatter(forest_to_other['longitude'], forest_to_other['latitude'],
-                  c='red', s=8, alpha=0.6, transform=ccrs.PlateCarree(),
-                  label='Forest Loss')
-        ax.scatter(urban_gain['longitude'], urban_gain['latitude'],
-                  c='gray', s=8, alpha=0.6, transform=ccrs.PlateCarree(),
-                  label='Urban Expansion')
+        # Create grouped bar chart
+        bars1 = ax.barh(x - width/2, pixels_start, width, label=f'{year_start}',
+                       color='steelblue', alpha=0.8, edgecolor='black')
+        bars2 = ax.barh(x + width/2, pixels_end, width, label=f'{year_end}',
+                       color='coral', alpha=0.8, edgecolor='black')
         
-        ax.set_title(f'MODIS Land Cover Changes: {year_start} to {year_end}', 
-                    fontsize=18, fontweight='bold', pad=20)
-        ax.legend(loc='lower left', fontsize=12, framealpha=0.9)
+        ax.set_ylabel('Land Cover Class', fontsize=12)
+        ax.set_xlabel('Pixel Count', fontsize=12)
+        ax.set_title(f'Land Cover Change Comparison: {year_start} vs {year_end}', 
+                    fontsize=16, fontweight='bold')
+        ax.set_yticks(x)
+        ax.set_yticklabels(class_names, fontsize=10)
+        ax.legend(fontsize=12)
+        ax.grid(True, alpha=0.3, axis='x')
+        
+        # Add change indicators
+        for i, change in enumerate(changes):
+            change_pct = change['change_percentage']
+            if abs(change_pct) > 2:
+                color = 'green' if change_pct > 0 else 'red'
+                ax.text(max(pixels_start[i], pixels_end[i]) * 1.02, i,
+                       f'{change_pct:+.1f}%', va='center',
+                       color=color, fontweight='bold', fontsize=9)
         
         plt.tight_layout()
         
-        filepath = self.plots_dir / f'change_map_{year_start}_{year_end}.png'
+        filepath = self.plots_dir / f'change_comparison_{year_start}_{year_end}.png'
         plt.savefig(filepath, dpi=150, bbox_inches='tight')
         plt.close()
         
