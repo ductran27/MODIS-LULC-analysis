@@ -1,0 +1,214 @@
+{
+  "years_analyzed": [
+    2015,
+    2018,
+    2021
+  ],
+  "total_transitions": 15,
+  "major_changes": [
+    {
+      "class_name": "Croplands",
+      "pixels_start": 773,
+      "pixels_end": 863,
+      "change_pixels": 90,
+      "change_percentage": 11.642949547218628
+    },
+    {
+      "class_name": "Mixed Forests",
+      "pixels_start": 237,
+      "pixels_end": 160,
+      "change_pixels": -77,
+      "change_percentage": -32.48945147679325
+    },
+    {
+      "class_name": "Urban and Built-up",
+      "pixels_start": 182,
+      "pixels_end": 246,
+      "change_pixels": 64,
+      "change_percentage": 35.16483516483517
+    },
+    {
+      "class_name": "Closed Shrublands",
+      "pixels_start": 233,
+      "pixels_end": 194,
+      "change_pixels": -39,
+      "change_percentage": -16.738197424892704
+    },
+    {
+      "class_name": "Savannas",
+      "pixels_start": 363,
+      "pixels_end": 329,
+      "change_pixels": -34,
+      "change_percentage": -9.366391184573002
+    },
+    {
+      "class_name": "Woody Savannas",
+      "pixels_start": 325,
+      "pixels_end": 346,
+      "change_pixels": 21,
+      "change_percentage": 6.461538461538462
+    },
+    {
+      "class_name": "Water Bodies",
+      "pixels_start": 158,
+      "pixels_end": 172,
+      "change_pixels": 14,
+      "change_percentage": 8.860759493670885
+    },
+    {
+      "class_name": "Evergreen Needleleaf Forest",
+      "pixels_start": 355,
+      "pixels_end": 341,
+      "change_pixels": -14,
+      "change_percentage": -3.943661971830986
+    },
+    {
+      "class_name": "Permanent Wetlands",
+      "pixels_start": 163,
+      "pixels_end": 150,
+      "change_pixels": -13,
+      "change_percentage": -7.975460122699387
+    },
+    {
+      "class_name": "Snow and Ice",
+      "pixels_start": 460,
+      "pixels_end": 447,
+      "change_pixels": -13,
+      "change_percentage": -2.8260869565217392
+    },
+    {
+      "class_name": "Barren",
+      "pixels_start": 210,
+      "pixels_end": 203,
+      "change_pixels": -7,
+      "change_percentage": -3.3333333333333335
+    },
+    {
+      "class_name": "Deciduous Needleleaf Forest",
+      "pixels_start": 145,
+      "pixels_end": 148,
+      "change_pixels": 3,
+      "change_percentage": 2.0689655172413794
+    }
+  ],
+  "area_changes": [
+    {
+      "class_name": "Croplands",
+      "pixels_start": 773,
+      "pixels_end": 863,
+      "change_pixels": 90,
+      "change_percentage": 11.642949547218628
+    },
+    {
+      "class_name": "Mixed Forests",
+      "pixels_start": 237,
+      "pixels_end": 160,
+      "change_pixels": -77,
+      "change_percentage": -32.48945147679325
+    },
+    {
+      "class_name": "Urban and Built-up",
+      "pixels_start": 182,
+      "pixels_end": 246,
+      "change_pixels": 64,
+      "change_percentage": 35.16483516483517
+    },
+    {
+      "class_name": "Closed Shrublands",
+      "pixels_start": 233,
+      "pixels_end": 194,
+      "change_pixels": -39,
+      "change_percentage": -16.738197424892704
+    },
+    {
+      "class_name": "Savannas",
+      "pixels_start": 363,
+      "pixels_end": 329,
+      "change_pixels": -34,
+      "change_percentage": -9.366391184573002
+    },
+    {
+      "class_name": "Woody Savannas",
+      "pixels_start": 325,
+      "pixels_end": 346,
+      "change_pixels": 21,
+      "change_percentage": 6.461538461538462
+    },
+    {
+      "class_name": "Water Bodies",
+      "pixels_start": 158,
+      "pixels_end": 172,
+      "change_pixels": 14,
+      "change_percentage": 8.860759493670885
+    },
+    {
+      "class_name": "Evergreen Needleleaf Forest",
+      "pixels_start": 355,
+      "pixels_end": 341,
+      "change_pixels": -14,
+      "change_percentage": -3.943661971830986
+    },
+    {
+      "class_name": "Permanent Wetlands",
+      "pixels_start": 163,
+      "pixels_end": 150,
+      "change_pixels": -13,
+      "change_percentage": -7.975460122699387
+    },
+    {
+      "class_name": "Snow and Ice",
+      "pixels_start": 460,
+      "pixels_end": 447,
+      "change_pixels": -13,
+      "change_percentage": -2.8260869565217392
+    },
+    {
+      "class_name": "Barren",
+      "pixels_start": 210,
+      "pixels_end": 203,
+      "change_pixels": -7,
+      "change_percentage": -3.3333333333333335
+    },
+    {
+      "class_name": "Evergreen Broadleaf Forest",
+      "pixels_start": 451,
+      "pixels_end": 456,
+      "change_pixels": 5,
+      "change_percentage": 1.1086474501108647
+    },
+    {
+      "class_name": "Deciduous Needleleaf Forest",
+      "pixels_start": 145,
+      "pixels_end": 148,
+      "change_pixels": 3,
+      "change_percentage": 2.0689655172413794
+    },
+    {
+      "class_name": "Grasslands",
+      "pixels_start": 597,
+      "pixels_end": 598,
+      "change_pixels": 1,
+      "change_percentage": 0.16750418760469013
+    },
+    {
+      "class_name": "Deciduous Broadleaf Forest",
+      "pixels_start": 348,
+      "pixels_end": 347,
+      "change_pixels": -1,
+      "change_percentage": -0.28735632183908044
+    }
+  ],
+  "forest_change": {
+    "start": 1536,
+    "end": 1452,
+    "change": -84,
+    "change_pct": -5.46875
+  },
+  "urban_change": {
+    "start": 182,
+    "end": 246,
+    "change": 64,
+    "change_pct": 35.16483516483517
+  },
+  "summary": "Forest change: -5.5%, Urban change: +35.2%"
+}

@@ -1,0 +1,413 @@
+{
+  "2015": {
+    "year": 2015,
+    "total_pixels": 5000,
+    "total_area_km2": 1250.0,
+    "class_statistics": {
+      "Croplands": {
+        "class_id": 12,
+        "pixel_count": 773,
+        "area_km2": 193.25,
+        "percentage": 15.459999999999999
+      },
+      "Grasslands": {
+        "class_id": 10,
+        "pixel_count": 597,
+        "area_km2": 149.25,
+        "percentage": 11.940000000000001
+      },
+      "Snow and Ice": {
+        "class_id": 15,
+        "pixel_count": 460,
+        "area_km2": 115.0,
+        "percentage": 9.2
+      },
+      "Evergreen Broadleaf Forest": {
+        "class_id": 2,
+        "pixel_count": 451,
+        "area_km2": 112.75,
+        "percentage": 9.02
+      },
+      "Savannas": {
+        "class_id": 9,
+        "pixel_count": 363,
+        "area_km2": 90.75,
+        "percentage": 7.26
+      },
+      "Evergreen Needleleaf Forest": {
+        "class_id": 1,
+        "pixel_count": 355,
+        "area_km2": 88.75,
+        "percentage": 7.1
+      },
+      "Deciduous Broadleaf Forest": {
+        "class_id": 4,
+        "pixel_count": 348,
+        "area_km2": 87.0,
+        "percentage": 6.959999999999999
+      },
+      "Woody Savannas": {
+        "class_id": 8,
+        "pixel_count": 325,
+        "area_km2": 81.25,
+        "percentage": 6.5
+      },
+      "Mixed Forests": {
+        "class_id": 5,
+        "pixel_count": 237,
+        "area_km2": 59.25,
+        "percentage": 4.74
+      },
+      "Closed Shrublands": {
+        "class_id": 6,
+        "pixel_count": 233,
+        "area_km2": 58.25,
+        "percentage": 4.66
+      },
+      "Barren": {
+        "class_id": 16,
+        "pixel_count": 210,
+        "area_km2": 52.5,
+        "percentage": 4.2
+      },
+      "Urban and Built-up": {
+        "class_id": 13,
+        "pixel_count": 182,
+        "area_km2": 45.5,
+        "percentage": 3.64
+      },
+      "Permanent Wetlands": {
+        "class_id": 11,
+        "pixel_count": 163,
+        "area_km2": 40.75,
+        "percentage": 3.26
+      },
+      "Water Bodies": {
+        "class_id": 17,
+        "pixel_count": 158,
+        "area_km2": 39.5,
+        "percentage": 3.16
+      },
+      "Deciduous Needleleaf Forest": {
+        "class_id": 3,
+        "pixel_count": 145,
+        "area_km2": 36.25,
+        "percentage": 2.9000000000000004
+      }
+    },
+    "class_percentages": {
+      "Croplands": 15.459999999999999,
+      "Grasslands": 11.940000000000001,
+      "Snow and Ice": 9.2,
+      "Evergreen Broadleaf Forest": 9.02,
+      "Savannas": 7.26,
+      "Evergreen Needleleaf Forest": 7.1,
+      "Deciduous Broadleaf Forest": 6.959999999999999,
+      "Woody Savannas": 6.5,
+      "Mixed Forests": 4.74,
+      "Closed Shrublands": 4.66,
+      "Barren": 4.2,
+      "Urban and Built-up": 3.64,
+      "Permanent Wetlands": 3.26,
+      "Water Bodies": 3.16,
+      "Deciduous Needleleaf Forest": 2.9000000000000004
+    },
+    "total_classes": 15,
+    "top_5_classes": [
+      {
+        "name": "Croplands",
+        "percentage": 15.459999999999999
+      },
+      {
+        "name": "Grasslands",
+        "percentage": 11.940000000000001
+      },
+      {
+        "name": "Snow and Ice",
+        "percentage": 9.2
+      },
+      {
+        "name": "Evergreen Broadleaf Forest",
+        "percentage": 9.02
+      },
+      {
+        "name": "Savannas",
+        "percentage": 7.26
+      }
+    ]
+  },
+  "2018": {
+    "year": 2018,
+    "total_pixels": 5000,
+    "total_area_km2": 1250.0,
+    "class_statistics": {
+      "Croplands": {
+        "class_id": 12,
+        "pixel_count": 800,
+        "area_km2": 200.0,
+        "percentage": 16.0
+      },
+      "Grasslands": {
+        "class_id": 10,
+        "pixel_count": 608,
+        "area_km2": 152.0,
+        "percentage": 12.16
+      },
+      "Snow and Ice": {
+        "class_id": 15,
+        "pixel_count": 495,
+        "area_km2": 123.75,
+        "percentage": 9.9
+      },
+      "Evergreen Broadleaf Forest": {
+        "class_id": 2,
+        "pixel_count": 458,
+        "area_km2": 114.5,
+        "percentage": 9.16
+      },
+      "Woody Savannas": {
+        "class_id": 8,
+        "pixel_count": 349,
+        "area_km2": 87.25,
+        "percentage": 6.98
+      },
+      "Savannas": {
+        "class_id": 9,
+        "pixel_count": 344,
+        "area_km2": 86.0,
+        "percentage": 6.88
+      },
+      "Evergreen Needleleaf Forest": {
+        "class_id": 1,
+        "pixel_count": 344,
+        "area_km2": 86.0,
+        "percentage": 6.88
+      },
+      "Deciduous Broadleaf Forest": {
+        "class_id": 4,
+        "pixel_count": 343,
+        "area_km2": 85.75,
+        "percentage": 6.859999999999999
+      },
+      "Urban and Built-up": {
+        "class_id": 13,
+        "pixel_count": 210,
+        "area_km2": 52.5,
+        "percentage": 4.2
+      },
+      "Closed Shrublands": {
+        "class_id": 6,
+        "pixel_count": 200,
+        "area_km2": 50.0,
+        "percentage": 4.0
+      },
+      "Barren": {
+        "class_id": 16,
+        "pixel_count": 198,
+        "area_km2": 49.5,
+        "percentage": 3.9600000000000004
+      },
+      "Mixed Forests": {
+        "class_id": 5,
+        "pixel_count": 190,
+        "area_km2": 47.5,
+        "percentage": 3.8
+      },
+      "Deciduous Needleleaf Forest": {
+        "class_id": 3,
+        "pixel_count": 163,
+        "area_km2": 40.75,
+        "percentage": 3.26
+      },
+      "Water Bodies": {
+        "class_id": 17,
+        "pixel_count": 152,
+        "area_km2": 38.0,
+        "percentage": 3.04
+      },
+      "Permanent Wetlands": {
+        "class_id": 11,
+        "pixel_count": 146,
+        "area_km2": 36.5,
+        "percentage": 2.92
+      }
+    },
+    "class_percentages": {
+      "Croplands": 16.0,
+      "Grasslands": 12.16,
+      "Snow and Ice": 9.9,
+      "Evergreen Broadleaf Forest": 9.16,
+      "Woody Savannas": 6.98,
+      "Savannas": 6.88,
+      "Evergreen Needleleaf Forest": 6.88,
+      "Deciduous Broadleaf Forest": 6.859999999999999,
+      "Urban and Built-up": 4.2,
+      "Closed Shrublands": 4.0,
+      "Barren": 3.9600000000000004,
+      "Mixed Forests": 3.8,
+      "Deciduous Needleleaf Forest": 3.26,
+      "Water Bodies": 3.04,
+      "Permanent Wetlands": 2.92
+    },
+    "total_classes": 15,
+    "top_5_classes": [
+      {
+        "name": "Croplands",
+        "percentage": 16.0
+      },
+      {
+        "name": "Grasslands",
+        "percentage": 12.16
+      },
+      {
+        "name": "Snow and Ice",
+        "percentage": 9.9
+      },
+      {
+        "name": "Evergreen Broadleaf Forest",
+        "percentage": 9.16
+      },
+      {
+        "name": "Woody Savannas",
+        "percentage": 6.98
+      }
+    ]
+  },
+  "2021": {
+    "year": 2021,
+    "total_pixels": 5000,
+    "total_area_km2": 1250.0,
+    "class_statistics": {
+      "Croplands": {
+        "class_id": 12,
+        "pixel_count": 863,
+        "area_km2": 215.75,
+        "percentage": 17.26
+      },
+      "Grasslands": {
+        "class_id": 10,
+        "pixel_count": 598,
+        "area_km2": 149.5,
+        "percentage": 11.959999999999999
+      },
+      "Evergreen Broadleaf Forest": {
+        "class_id": 2,
+        "pixel_count": 456,
+        "area_km2": 114.0,
+        "percentage": 9.120000000000001
+      },
+      "Snow and Ice": {
+        "class_id": 15,
+        "pixel_count": 447,
+        "area_km2": 111.75,
+        "percentage": 8.94
+      },
+      "Deciduous Broadleaf Forest": {
+        "class_id": 4,
+        "pixel_count": 347,
+        "area_km2": 86.75,
+        "percentage": 6.94
+      },
+      "Woody Savannas": {
+        "class_id": 8,
+        "pixel_count": 346,
+        "area_km2": 86.5,
+        "percentage": 6.92
+      },
+      "Evergreen Needleleaf Forest": {
+        "class_id": 1,
+        "pixel_count": 341,
+        "area_km2": 85.25,
+        "percentage": 6.819999999999999
+      },
+      "Savannas": {
+        "class_id": 9,
+        "pixel_count": 329,
+        "area_km2": 82.25,
+        "percentage": 6.58
+      },
+      "Urban and Built-up": {
+        "class_id": 13,
+        "pixel_count": 246,
+        "area_km2": 61.5,
+        "percentage": 4.92
+      },
+      "Barren": {
+        "class_id": 16,
+        "pixel_count": 203,
+        "area_km2": 50.75,
+        "percentage": 4.06
+      },
+      "Closed Shrublands": {
+        "class_id": 6,
+        "pixel_count": 194,
+        "area_km2": 48.5,
+        "percentage": 3.88
+      },
+      "Water Bodies": {
+        "class_id": 17,
+        "pixel_count": 172,
+        "area_km2": 43.0,
+        "percentage": 3.44
+      },
+      "Mixed Forests": {
+        "class_id": 5,
+        "pixel_count": 160,
+        "area_km2": 40.0,
+        "percentage": 3.2
+      },
+      "Permanent Wetlands": {
+        "class_id": 11,
+        "pixel_count": 150,
+        "area_km2": 37.5,
+        "percentage": 3.0
+      },
+      "Deciduous Needleleaf Forest": {
+        "class_id": 3,
+        "pixel_count": 148,
+        "area_km2": 37.0,
+        "percentage": 2.96
+      }
+    },
+    "class_percentages": {
+      "Croplands": 17.26,
+      "Grasslands": 11.959999999999999,
+      "Evergreen Broadleaf Forest": 9.120000000000001,
+      "Snow and Ice": 8.94,
+      "Deciduous Broadleaf Forest": 6.94,
+      "Woody Savannas": 6.92,
+      "Evergreen Needleleaf Forest": 6.819999999999999,
+      "Savannas": 6.58,
+      "Urban and Built-up": 4.92,
+      "Barren": 4.06,
+      "Closed Shrublands": 3.88,
+      "Water Bodies": 3.44,
+      "Mixed Forests": 3.2,
+      "Permanent Wetlands": 3.0,
+      "Deciduous Needleleaf Forest": 2.96
+    },
+    "total_classes": 15,
+    "top_5_classes": [
+      {
+        "name": "Croplands",
+        "percentage": 17.26
+      },
+      {
+        "name": "Grasslands",
+        "percentage": 11.959999999999999
+      },
+      {
+        "name": "Evergreen Broadleaf Forest",
+        "percentage": 9.120000000000001
+      },
+      {
+        "name": "Snow and Ice",
+        "percentage": 8.94
+      },
+      {
+        "name": "Deciduous Broadleaf Forest",
+        "percentage": 6.94
+      }
+    ]
+  }
+}
