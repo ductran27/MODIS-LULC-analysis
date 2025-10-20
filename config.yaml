@@ -1,0 +1,27 @@
+# Configuration for MODIS Land Cover Analysis System
+
+# Data source configuration
+data_sources:
+  product: "MCD12Q1"  # MODIS Land Cover Type product
+  version: "061"
+  classification: "IGBP"  # IGBP land cover classification
+
+# Analysis configuration
+analysis:
+  years: [2015, 2018, 2021]  # Years to analyze
+  pixel_resolution_m: 500  # MODIS resolution
+  pixel_area_km2: 0.25  # 500m x 500m
+  
+  # Change detection thresholds
+  major_change_threshold_pct: 2.0  # Changes >2% are major
+  
+  # Regional focus (optional)
+  study_region:
+    name: "Global"
+    bounds: [-180, -60, 180, 80]  # [west, south, east, north]
+
+# Visualization configuration
+visualization:
+  dpi: 150
+  colormap_changes: "RdYlGn"  # Red-Yellow-Green for changes
+  use_standard_modis_colors: true
