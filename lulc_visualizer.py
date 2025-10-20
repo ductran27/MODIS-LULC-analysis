@@ -45,46 +45,80 @@ class LULCVisualizer:
         plt.style.use('seaborn-v0_8-whitegrid')
     
     def create_global_map(self, df, area_results, year):
-        """Create global land cover map as pie chart showing area distribution"""
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 8))
+        """Create global land cover map showing spatial distribution"""
+        fig = plt.figure(figsize=(20, 10))
+        ax = fig.add_subplot(111, projection=ccrs.Robinson())
         
-        # Pie chart showing area distribution
-        class_stats = area_results['class_statistics']
-        classes = list(class_stats.keys())
-        percentages = [class_stats[c]['percentage'] for c in classes]
-        colors = [self.LC_COLORS.get(c, '#808080') for c in classes]
+        ax.set_global()
         
-        # Only show classes with >2% coverage
-        significant = [(c, p, col) for c, p, col in zip(classes, percentages, colors) if p > 2]
-        if significant:
-            labels, values, colors_sig = zip(*significant)
-        else:
-            labels, values, colors_sig = classes[:10], percentages[:10], colors[:10]
+        # Add geographic features
+        ax.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor='#333333')
+        ax.add_feature(cfeature.BORDERS, linewidth=0.3, edgecolor='#666666', alpha=0.5)
+        ax.add_feature(cfeature.OCEAN, facecolor='#E0F3F8')
         
-        wedges, texts, autotexts = ax1.pie(values, labels=labels, colors=colors_sig,
-                                            autopct='%1.1f%%', startangle=90,
-                                            textprops={'fontsize': 9})
+        # Plot land cover pixels with proper colors
+        for lc_class in sorted(df['land_cover_class'].unique()):
+            class_data = df[df['land_cover_class'] == lc_class]
+            lc_name = class_data['land_cover_name'].iloc[0]
+            color = self.LC_COLORS.get(lc_name, '#808080')
+            
+            ax.scatter(class_data['longitude'], class_data['latitude'],
+                      c=color, s=8, alpha=0.8, edgecolors='none',
+                      transform=ccrs.PlateCarree(), rasterized=True,
+                      label=lc_name if len(class_data) > 100 else None)
+        
+        # Title
+        ax.set_title(f'MODIS Global Land Cover Classification - {year}', 
+                    fontsize=18, fontweight='bold', pad=20)
+        
+        # Create custom legend with all classes
+        legend_elements = []
+        for lc_name, color in self.LC_COLORS.items():
+            if lc_name in df['land_cover_name'].values:
+                legend_elements.append(mpatches.Patch(color=color, label=lc_name))
+        
+        # Place legend outside plot
+        ax.legend(handles=legend_elements[:12], loc='lower left', 
+                 fontsize=8, ncol=2, frameon=True, framealpha=0.95,
+                 title='Land Cover Classes', title_fontsize=9)
+        
+        plt.tight_layout()
+        
+        filepath = self.plots_dir / f'global_lc_map_{year}.png'
+        plt.savefig(filepath, dpi=150, bbox_inches='tight', facecolor='white')
+        plt.close()
+        
+        # Also create area statistics chart
+        self._create_area_chart(area_results, year)
+        
+        return filepath
+    
+    def _create_area_chart(self, area_results, year):
+        """Create separate area statistics chart"""
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
+        
+        # Pie chart
+        top_classes = area_results['top_5_classes'][:10]
+        labels = [c['name'][:20] for c in top_classes]
+        values = [c['percentage'] for c in top_classes]
+        colors = [self.LC_COLORS.get(top_classes[i]['name'], '#808080') 
+                 for i in range(len(top_classes))]
+        
+        ax1.pie(values, labels=labels, colors=colors, autopct='%1.1f%%',
+               startangle=90, textprops={'fontsize': 9})
         ax1.set_title(f'Land Cover Distribution - {year}', fontsize=14, fontweight='bold')
         
-        # Bar chart of top 10 classes
-        top_classes = area_results['top_5_classes'][:10]
-        class_names = [c['name'][:25] for c in top_classes]  # Truncate names
-        class_pcts = [c['percentage'] for c in top_classes]
-        bar_colors = [self.LC_COLORS.get(top_classes[i]['name'], '#808080') 
-                     for i in range(len(top_classes))]
-        
-        ax2.barh(class_names, class_pcts, color=bar_colors, alpha=0.8, edgecolor='black')
+        # Bar chart
+        ax2.barh(labels, values, color=colors, alpha=0.8, edgecolor='black')
         ax2.set_xlabel('Coverage (%)', fontsize=11)
         ax2.set_title('Top Land Cover Classes', fontsize=14, fontweight='bold')
         ax2.grid(True, alpha=0.3, axis='x')
         
         plt.tight_layout()
         
-        filepath = self.plots_dir / f'global_lc_{year}.png'
+        filepath = self.plots_dir / f'area_stats_{year}.png'
         plt.savefig(filepath, dpi=150, bbox_inches='tight')
         plt.close()
-        
-        return filepath
     
     def create_temporal_analysis(self, area_results, change_results):
         """Create temporal trend analysis plots"""
